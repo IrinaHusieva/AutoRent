@@ -1,0 +1,51 @@
+.section {
+  background-image: url('../../assets/images/auto.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 800px;
+  width: 1350px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+.container {
+  background-color: #3471ff16;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: start;
+  width: 500px;
+}
+
+.heading {
+  font-size: 2em;
+  margin: 0;
+}
+
+.paragraph {
+  font-size: 1.2em;
+}
+.btn {
+  display: flex;
+  width: 274px;
+  height: 44px;
+  padding: 12px 99px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: #3470ff;
+  border: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  color: var(--White, #fff);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0b44cd;
+}
