@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
-import { Cards } from './../card/Cards';
+import  Cards  from './../card/Cards';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAdverts } from "../../redux/operations";
+import { SearchBar } from "../searchBar/SearchBar";
 
 
 const CatalogPage = () => {
@@ -13,8 +14,11 @@ const CatalogPage = () => {
     dispatch(fetchAdverts());
     }, [dispatch]);
     
-    return (
-        <Cards cars={cars} />
+  return (
+    <>
+      <SearchBar/>
+      <Cards cars={cars} />
+    </>
     );
 };
 

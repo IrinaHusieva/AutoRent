@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAdverts } from "./operations";
+import { fetchAdverts, fetchBrends } from "./operations";
+
 
 const initialState = {
-    cars: [],
-    favorite: false,
-    isLoading: false,
-    error: ''
+  cars: [],
+  make: [],
+  favorite: false,
+  isLoading: false,
+  error: '',
+  filters: {
+  selectedBrand: '', 
+  },
 }
 const handlePending = (state) => {
   state.isLoading = true;
@@ -26,6 +31,11 @@ const fetchAllAdverts = (state, { payload }) => {
   state.cars = payload;
 };
 
+const fetchAllBrands = (state, { payload }) => {
+  state.make = [...new Set(payload.map((car) => car.make))];
+  // state.filters.selectedBrand = payload
+  
+}
 // const loadMoreAdverts = (state) => {
 //   state.displayedCars = state.cars.length;
 // };
@@ -38,10 +48,14 @@ initialState: initialState,
       addFavorite(state, action) {
           state.favorite = action.payload
     },
+    setSelectedBrand(state, action) {
+      state.filters.selectedBrand = action.payload
+    }
     },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAdverts.fulfilled, fetchAllAdverts)
+      .addCase(fetchBrends.fulfilled, fetchAllBrands)
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
         handlePending

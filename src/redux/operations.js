@@ -14,3 +14,16 @@ export const fetchAdverts = createAsyncThunk(
     }
   }
 );
+
+
+export const fetchBrends = createAsyncThunk(
+  "cars/fetchBrands",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("/cars");
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.response.data);
+    }
+  }
+);
