@@ -9,8 +9,18 @@ export const Cards = () => {
     const { cars } = useSelector((state) => state.adverts);
     
   return (
-    cars.map(car => (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap', 
+        justifyContent: 'space-between', 
+        paddingLeft: '115px',
+        paddingRight: '115px',
+      }}
+    >
+      {cars.map((car) => (
         <CarCard key={car.id} car={car} />
-      ))
+      ))}
+    </div>
   )
 }
