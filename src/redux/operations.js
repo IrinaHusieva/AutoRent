@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createAction } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://65722a3bd61ba6fcc0147b17.mockapi.io";
 
@@ -29,6 +30,7 @@ export const fetchBrends = createAsyncThunk(
   }
 );
 
+export const setSelectedPriceRange = createAction("cars/setSelectedPriceRange");
 
 // export const fetchBrends = createAsyncThunk(
 //   "cars/fetchBrands",
