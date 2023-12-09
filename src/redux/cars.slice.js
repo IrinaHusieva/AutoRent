@@ -3,6 +3,7 @@ import { fetchAdverts, fetchBrends } from "./operations";
 
 
 const initialState = {
+  name:'adverts',
   cars: [],
   make: [],
   favorite: false,
@@ -33,9 +34,8 @@ const fetchAllAdverts = (state, { payload }) => {
 
 const fetchAllBrands = (state, { payload }) => {
   state.make = [...new Set(payload.map((car) => car.make))];
-  // state.filters.selectedBrand = payload
-  
-}
+};
+
 // const loadMoreAdverts = (state) => {
 //   state.displayedCars = state.cars.length;
 // };
@@ -48,14 +48,19 @@ initialState: initialState,
       addFavorite(state, action) {
           state.favorite = action.payload
     },
-    setSelectedBrand(state, action) {
-      state.filters.selectedBrand = action.payload
-    }
+     setSelectedBrand: (state, action) => {
+      state.filters.selectedBrand = action.payload;
     },
-  extraReducers: (builder) => {
+    },
+   extraReducers: (builder) => {
     builder
-      .addCase(fetchAdverts.fulfilled, fetchAllAdverts)
-      .addCase(fetchBrends.fulfilled, fetchAllBrands)
+      .addCase(fetchAdverts.fulfilled, (state, action) => {
+        state.cars = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchBrends.fulfilled, (state, action) => {
+        state.make = action.payload;
+      })
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
         handlePending
@@ -70,5 +75,6 @@ initialState: initialState,
       );
   },
 });
+
 
 export default carsSlice.reducer;

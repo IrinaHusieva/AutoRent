@@ -2,23 +2,24 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBrends } from '../../redux/operations';
-import { fetchAdverts } from '../../redux/operations';
+import { fetchBrends, fetchAdverts } from '../../redux/operations';
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
-  const brands = useSelector((state) => state.adverts.make); 
+  const brands = useSelector((state) => state.adverts.make);
   const [selectedBrand, setSelectedBrand] = useState('');
 
   useEffect(() => {
-  dispatch(fetchAdverts(selectedBrand));
-}, [dispatch, selectedBrand]);
+    dispatch(fetchBrends());
+  }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(fetchAdverts(selectedBrand));
+  }, [dispatch, selectedBrand]);
 
   const handleBrandChange = (event) => {
     const selectedBrand = event.target.value;
-    setSelectedBrand(selectedBrand); 
-    dispatch(fetchBrends(selectedBrand));
+    setSelectedBrand(selectedBrand);
   };
 
   return (
@@ -26,7 +27,7 @@ export const SearchBar = () => {
       <TextField
         id="filled-select-currency"
         select
-        label="Select Brand"
+        label="Car brand"
         value={selectedBrand}
         onChange={handleBrandChange}
         variant="filled"
