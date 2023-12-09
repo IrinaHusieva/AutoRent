@@ -1,4 +1,4 @@
-// CarCard.jsx
+
 
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
@@ -45,16 +45,16 @@ const CarCard = ({ car }) => {
         )}
 
         <CardContent className={styles.cardContent}>
-          <Typography variant="h5" component="div">
+          <h2 className={styles.txt} variant="h5" component="div">
             {car.make} {car.model} {car.rentalPrice}
-          </Typography>
-          <Typography color="text.secondary">
+          </h2>
+          <p className={styles.minidescr} color="text.secondary">
             {city} <DividerSvg /> {country} <DividerSvg /> {car.rentalCompany} <DividerSvg /> {car.type} <DividerSvg /> {car.model} <DividerSvg /> {car.id} <DividerSvg /> {car.functionalities[0]}
-          </Typography>
-          <Button variant="contained" style={{ backgroundColor: '#3470FF' }}>
-            Learn more
-          </Button>
+          </p>
         </CardContent>
+          <button type='button' className={styles.btn}>
+            Learn more
+          </button>
       </Card>
     </div>
   );

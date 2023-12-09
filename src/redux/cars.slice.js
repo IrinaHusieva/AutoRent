@@ -28,14 +28,7 @@ const handleFulfilled = (state) => {
   state.isLoading = false;
 };
 
-// const fetchAllAdverts = (state, { payload }) => {
-//   state.isLoading = false;
-//   state.cars = payload;
-// };
 
-// const fetchAllBrands = (state, { payload }) => {
-//   state.make = [...new Set(payload.map((car) => car.make))];
-// };
 
 // const loadMoreAdverts = (state) => {
 //   state.displayedCars = state.cars.length;

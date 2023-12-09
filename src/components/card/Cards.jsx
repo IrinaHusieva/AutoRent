@@ -1,9 +1,9 @@
 import React from 'react';
 import CarCard from './CarCard';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import css from './CarCard.module.css'
 
 const Cards = () => {
-  const dispatch = useDispatch();
   const { cars } = useSelector((state) => state.adverts);
   const selectedBrand = useSelector((state) => state.adverts.filters.selectedBrand);
   const filteredCars = selectedBrand
@@ -11,19 +11,11 @@ const Cards = () => {
     : cars;
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        paddingLeft: '115px',
-        paddingRight: '115px',
-      }}
-    >
-      {filteredCars.map((car) => (
-        <CarCard key={car.id} car={car} />
-      ))}
-    </div>
+    <div className={css.cardsContainer}>
+  {filteredCars.map((car) => (
+    <CarCard key={car.id} car={car} />
+  ))}
+</div>
   );
 };
 
