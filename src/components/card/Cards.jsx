@@ -1,21 +1,33 @@
+// Cards.jsx
 import React from 'react';
 import CarCard from './CarCard';
 import { useSelector } from 'react-redux';
-import css from './CarCard.module.css'
+import css from './CarCard.module.css';
 
-const Cards = () => {
+const Cards = ({ renderAllImages }) => {
   const { cars } = useSelector((state) => state.adverts);
-  const selectedBrand = useSelector((state) => state.adverts.filters.selectedBrand);
-  const filteredCars = selectedBrand
-    ? cars.filter((car) => car.make === selectedBrand)
+  const selectedBrandCatalog = useSelector((state) => state.adverts.filters.selectedBrand);
+  const selectedBrandFavorites = useSelector((state) => state.favorites.selectedBrand);
+  const favoriteCars = useSelector((state) => state.favorites.favoriteCars);
+
+  // Фільтрація за брендом для каталогу
+  const filteredByBrandCatalog = selectedBrandCatalog
+    ? cars.filter((car) => car.make === selectedBrandCatalog)
     : cars;
+
+  // Фільтрація за брендом для улюблених автомобілів
+  const filteredByBrandFavorites = selectedBrandFavorites
+    ? favoriteCars.filter((car) => car.make === selectedBrandFavorites)
+    : favoriteCars;
+
+  const carsToRender = renderAllImages ? filteredByBrandCatalog : filteredByBrandFavorites;
 
   return (
     <div className={css.cardsContainer}>
-  {filteredCars.map((car) => (
-    <CarCard key={car.id} car={car} />
-  ))}
-</div>
+      {carsToRender.map((car) => (
+        <CarCard key={car.id} car={car} />
+      ))}
+    </div>
   );
 };
 

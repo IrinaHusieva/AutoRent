@@ -1,11 +1,10 @@
-
-
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import Icon from '../icon/Icon';
 import styles from './CarCard.module.css';
+import { useDispatch } from 'react-redux';
+import { removeFavorite, addFavorite,  } from '../../redux/favoritesSlice';
 
 const DividerSvg = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="2" height="16" viewBox="0 0 2 16" fill="none">
@@ -23,21 +22,47 @@ const getAddressParts = (address) => {
 const CarCard = ({ car }) => {
   const { city, country } = getAddressParts(car.address);
   const [imageError, setImageError] = useState(false);
+  const dispatch = useDispatch();
 
   const handleImageError = () => {
     setImageError(true);
+  };
+const [isButtonClicked, setIsButtonClicked] = useState(
+    () => localStorage.getItem(`favorite-${car.id}`) === 'true'
+  );
+
+   const handleButtonClick = () => {
+    setIsButtonClicked(!isButtonClicked);
+    localStorage.setItem(`favorite-${car.id}`, String(!isButtonClicked));
+
+    if (isButtonClicked) {
+      dispatch(removeFavorite(car));
+    } else {
+      dispatch(addFavorite(car));
+      }
   };
 
   return (
     <div className={styles.cardContainer}>
       <Card className={styles.card}>
         {car.img && !imageError ? (
+             <>
           <img
             src={car.img}
             alt={car.model}
             className={styles.img}
             onError={handleImageError}
           />
+          <div className={styles.iconWrap}>
+            <button
+              type="button"
+              className={`${styles.icon} ${isButtonClicked ? styles.blueIcon : ''}`}
+              onClick={handleButtonClick}
+            >
+              <Icon fill={isButtonClicked ? '#3470ff' : 'none'} stroke={isButtonClicked ? '#3470ff' : '#fff'} />
+            </button>
+          </div>
+        </>
         ) : (
           <div className={styles.placeholder}>
             {imageError ? 'Failed to load image' : 'No Image'}
