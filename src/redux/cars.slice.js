@@ -8,6 +8,7 @@ const initialState = {
   make: [],
   favorite: false,
   isLoading: false,
+  page: 1,
   error: '',
   filters: {
     selectedBrand: '', 
@@ -29,11 +30,6 @@ const handleFulfilled = (state) => {
 };
 
 
-
-// const loadMoreAdverts = (state) => {
-//   state.displayedCars = state.cars.length;
-// };
-
 const carsSlice = createSlice({
   name: "adverts", 
 initialState: initialState,
@@ -47,6 +43,9 @@ initialState: initialState,
     },
       setSelectedPriceRange: (state, action) => {
       state.filters.selectedPriceRange = action.payload;
+    },
+      updatePage: (state, action) => {
+      state.page = action.payload;
     },
     },
    extraReducers: (builder) => {
@@ -75,3 +74,4 @@ initialState: initialState,
 
 
 export default carsSlice.reducer;
+export const { updatePage } = carsSlice.actions;

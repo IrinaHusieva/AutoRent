@@ -7,10 +7,20 @@ axios.defaults.baseURL = "https://65722a3bd61ba6fcc0147b17.mockapi.io";
 
 export const fetchAdverts = createAsyncThunk(
   "cars/fetchAll",
-  async (selectedBrand, thunkAPI) => {
+  async ({ filters, page = 1 }, thunkAPI) => {
     try {
-      const response = await axios.get(`/cars${selectedBrand ? `?make=${selectedBrand}` : ''}`);
-      return response.data;
+      const params = { ...filters, page, limit: 12 };
+      const response = await axios.get("/cars", { params });
+      const fetchedAdverts = response.data;
+      const currentState = thunkAPI.getState();
+      const currentCards = currentState.adverts.cars;
+
+      const updatedCards = [
+        ...currentCards.filter((card) => !fetchedAdverts.find((newCard) => newCard.id === card.id)),
+        ...fetchedAdverts,
+      ];
+
+      return updatedCards;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.data);
     }
@@ -32,14 +42,3 @@ export const fetchBrends = createAsyncThunk(
 
 export const setSelectedPriceRange = createAction("cars/setSelectedPriceRange");
 
-// export const fetchBrends = createAsyncThunk(
-//   "cars/fetchBrands",
-//   async (selectedBrand, thunkAPI) => {
-//     try {
-//       const response = await axios.get(`/cars?make=${selectedBrand}`);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.response.data);
-//     }
-//   }
-// );
