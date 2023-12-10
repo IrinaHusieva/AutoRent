@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/AutoRent/static/css/main.0d8ce54a.css",
-    "main.js": "/AutoRent/static/js/main.ec5bad91.js",
+    "main.css": "/AutoRent/static/css/main.3e7a2731.css",
+    "main.js": "/AutoRent/static/js/main.b05afa20.js",
     "static/media/auto.jpg": "/AutoRent/static/media/auto.094e97b04a6a0210648c.jpg",
     "index.html": "/AutoRent/index.html",
-    "main.0d8ce54a.css.map": "/AutoRent/static/css/main.0d8ce54a.css.map",
-    "main.ec5bad91.js.map": "/AutoRent/static/js/main.ec5bad91.js.map"
+    "main.3e7a2731.css.map": "/AutoRent/static/css/main.3e7a2731.css.map",
+    "main.b05afa20.js.map": "/AutoRent/static/js/main.b05afa20.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d8ce54a.css",
-    "static/js/main.ec5bad91.js"
+    "static/css/main.3e7a2731.css",
+    "static/js/main.b05afa20.js"
   ]
 }
