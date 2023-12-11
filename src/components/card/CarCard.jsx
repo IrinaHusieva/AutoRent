@@ -77,9 +77,11 @@ const [isButtonClicked, setIsButtonClicked] = useState(
             {city} <DividerSvg /> {country} <DividerSvg /> {car.rentalCompany} <DividerSvg /> {car.type} <DividerSvg /> {car.model} <DividerSvg /> {car.id} <DividerSvg /> {car.functionalities[0]}
           </p>
         </CardContent>
+        <div>
           <button type='button' className={styles.btn}>
             Learn more
           </button>
+        </div>
       </Card>
     </div>
   );
