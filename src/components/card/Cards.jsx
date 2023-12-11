@@ -1,4 +1,4 @@
-// Cards.jsx
+
 import React from 'react';
 import CarCard from './CarCard';
 import { useSelector } from 'react-redux';
@@ -10,12 +10,10 @@ const Cards = ({ renderAllImages }) => {
   const selectedBrandFavorites = useSelector((state) => state.favorites.selectedBrand);
   const favoriteCars = useSelector((state) => state.favorites.favoriteCars);
 
-  // Фільтрація за брендом для каталогу
   const filteredByBrandCatalog = selectedBrandCatalog
     ? cars.filter((car) => car.make === selectedBrandCatalog)
     : cars;
 
-  // Фільтрація за брендом для улюблених автомобілів
   const filteredByBrandFavorites = selectedBrandFavorites
     ? favoriteCars.filter((car) => car.make === selectedBrandFavorites)
     : favoriteCars;
