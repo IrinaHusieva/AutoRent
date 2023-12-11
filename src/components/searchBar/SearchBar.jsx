@@ -3,6 +3,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBrends, fetchAdverts } from '../../redux/operations';
+import { updatePage } from '../../redux/cars.slice';
+
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ export const SearchBar = () => {
 
   const handleBrandChange = (event, value) => {
     dispatch(setSelectedBrand(value));
+    dispatch(updatePage(1)); 
   };
 
   const handlePriceChange = (event, value) => {
